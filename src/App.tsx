@@ -1,24 +1,33 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
-  const [products, setProducts] = useState(null);
+  const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } =
+    useAuth0();
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/api/products')
-      .then((response) => setProducts(response.data));
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        {/* Existing content */}
-        <p>Products: {products ? JSON.stringify(products) : 'Loading...'}</p>
-      </header>
-    </div>
-  );
+  if (isAuthenticated) {
+    return (
+      <div>
+        Hello {user?.name}
+        <button
+          onClick={() =>
+            logout({ logoutParams: { returnTo: window.location.origin } })
+          }
+        >
+          Log out
+        </button>
+      </div>
+    );
+  } else {
+    return <button onClick={() => loginWithRedirect()}>Log in</button>;
+  }
 }
 
 export default App;
