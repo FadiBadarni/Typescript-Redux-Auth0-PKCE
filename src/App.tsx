@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCustomAuth } from './hooks/useAuth';
-import callApi from './services/apiService';
+import apiService from './services/apiService';
 
 function App() {
   const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } =
@@ -9,7 +9,23 @@ function App() {
   const token = useCustomAuth();
 
   useEffect(() => {
-    if (token) callApi(token);
+    const fetchData = async () => {
+      if (token) {
+        try {
+          const products = await apiService({
+            endpoint: 'products',
+            method: 'GET',
+            token: token,
+          });
+
+          console.log('Fetched products:', products);
+        } catch (err) {
+          console.error('Error fetching products:', err);
+        }
+      }
+    };
+
+    fetchData();
   }, [token]);
 
   if (isLoading) return <div>Loading...</div>;

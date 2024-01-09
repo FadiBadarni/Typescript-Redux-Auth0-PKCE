@@ -11,7 +11,7 @@ export const useCustomAuth = () => {
         try {
           const accessToken = await getAccessTokenSilently({
             authorizationParams: {
-              audience: 'https://fadi-store.com/',
+              audience: process.env.REACT_APP_AUTH0_AUDIENCE,
             },
           });
           setToken(accessToken);
