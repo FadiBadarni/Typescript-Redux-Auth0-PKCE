@@ -3,25 +3,18 @@ import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
 interface ApiRequestParams {
   endpoint: string;
   method: Method;
-  data?: any;
-  token: string;
+  token?: string;
 }
 
-const apiService = async ({
-  endpoint,
-  method,
-  data,
-  token,
-}: ApiRequestParams) => {
+const apiService = async ({ endpoint, method, token }: ApiRequestParams) => {
   const url = `${process.env.REACT_APP_API_URL}/${endpoint}`;
+
+  const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
 
   const config: AxiosRequestConfig = {
     method,
     url,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    data,
+    headers,
   };
 
   try {

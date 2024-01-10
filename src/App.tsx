@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useCustomAuth } from './hooks/useAuth';
 import apiService from './services/apiService';
+import { useCustomAuth } from './hooks/useAuth';
 
 function App() {
   const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } =
@@ -10,14 +10,13 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (token) {
+      if (isAuthenticated && token) {
         try {
           const products = await apiService({
             endpoint: 'products',
             method: 'GET',
-            token: token,
+            token,
           });
-
           console.log('Fetched products:', products);
         } catch (err) {
           console.error('Error fetching products:', err);
@@ -26,7 +25,7 @@ function App() {
     };
 
     fetchData();
-  }, [token]);
+  }, [isAuthenticated, token]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Oops... {error.message}</div>;
