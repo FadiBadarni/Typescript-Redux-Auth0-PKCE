@@ -9,6 +9,22 @@ function App() {
   const token = useCustomAuth();
 
   useEffect(() => {
+    const postLogin = async () => {
+      if (isAuthenticated && token) {
+        try {
+          // Call the login/callback endpoint
+          await apiService({
+            endpoint: 'login/callback',
+            method: 'POST',
+            token,
+          });
+          console.log('User registration or retrieval completed');
+        } catch (err) {
+          console.error('Error in user registration:', err);
+        }
+      }
+    };
+
     const fetchData = async () => {
       if (isAuthenticated && token) {
         try {
@@ -24,6 +40,7 @@ function App() {
       }
     };
 
+    postLogin();
     fetchData();
   }, [isAuthenticated, token]);
 
