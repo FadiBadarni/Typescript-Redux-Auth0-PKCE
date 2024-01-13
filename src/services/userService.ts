@@ -1,9 +1,9 @@
 import apiClient, { ErrorData } from './apiClient';
 
-class AuthService {
+class UserService {
   async fetchUserInfo() {
     try {
-      const response = await apiClient.get('/auth/callback');
+      const response = await apiClient.get('/user/info');
       return response.data;
     } catch (error) {
       const apiError = error as ErrorData;
@@ -12,5 +12,5 @@ class AuthService {
   }
 }
 
-const authServiceInstance = new AuthService();
-export default authServiceInstance;
+const userServiceInstance = new UserService();
+export default userServiceInstance;

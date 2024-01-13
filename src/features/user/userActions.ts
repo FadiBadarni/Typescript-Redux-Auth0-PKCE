@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import authServiceInstance from '../../services/authService';
+import userServiceInstance from '../../services/userService';
 
 export const fetchUserInfo = createAsyncThunk('user/info', async () => {
   try {
-    const data = await authServiceInstance.fetchUserInfo();
+    const data = await userServiceInstance.fetchUserInfo();
     return data;
   } catch (error) {
     const message = (error as Error).message || 'Failed to fetch user info';
