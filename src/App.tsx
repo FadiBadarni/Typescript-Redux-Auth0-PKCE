@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './store/store';
 import { LoadingStatus } from './features/user/userTypes';
 import { fetchUserInfo } from './features/user/userActions';
+import './index.css';
 
 function App() {
   const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } =
@@ -35,12 +36,19 @@ function App() {
             onClick={() =>
               logout({ logoutParams: { returnTo: window.location.origin } })
             }
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Log out
           </button>
         </>
       ) : (
-        <button onClick={() => loginWithRedirect()}>Log in</button>
+        <button
+          onClick={() => loginWithRedirect()}
+          className="bg-blue
+-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Log in
+        </button>
       )}
     </div>
   );
