@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import apiService from './services/apiService';
 import { useCustomAuth } from './hooks/useAuth';
@@ -24,9 +24,8 @@ function App() {
         dispatch(startLoading());
         try {
           const updatedUserInfo = await apiService({
-            endpoint: 'login/callback',
+            endpoint: 'auth/callback',
             method: 'POST',
-            token,
           });
           dispatch(userLoaded(updatedUserInfo));
         } catch (error) {
@@ -39,22 +38,7 @@ function App() {
       }
     };
 
-    const fetchData = async () => {
-      if (isAuthenticated && token) {
-        try {
-          const products = await apiService({
-            endpoint: 'products',
-            method: 'GET',
-            token,
-          });
-          console.log('Fetched products:', products);
-        } catch (err) {
-          console.error('Error fetching products:', err);
-        }
-      }
-    };
-
-    postLogin().then(fetchData);
+    postLogin();
   }, [isAuthenticated, token, dispatch]);
 
   if (isLoading || isUserLoading) return <div>Loading...</div>;
