@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { RootState } from '../../store/store';
 import { clearUser } from '../../features/user/userSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar: React.FC = () => {
   const { loginWithRedirect, logout } = useAuth0();
@@ -23,15 +25,17 @@ const Navbar: React.FC = () => {
         {userData ? (
           <button
             onClick={handleLogout}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
           >
+            <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
             Log out
           </button>
         ) : (
           <button
             onClick={() => loginWithRedirect()}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
           >
+            <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
             Log in
           </button>
         )}
