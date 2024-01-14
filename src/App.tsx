@@ -7,38 +7,21 @@ import { fetchUserInfo } from './features/user/userActions';
 import './index.css';
 import Navbar from './components/navbar';
 import HomePage from './components/navbar/HomePage';
-import { setAccessToken } from './features/auth/authReducer';
+import { useCustomAuth } from './hooks/useAuth';
 
 function App() {
-  const { isLoading, isAuthenticated, getAccessTokenSilently, error } =
-    useAuth0();
+  const { isLoading, error } = useAuth0();
   const dispatch = useDispatch<AppDispatch>();
+  const accessToken = useCustomAuth();
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(fetchUserInfo());
+    }
+  }, [accessToken, dispatch]);
+
   const isUserLoading =
     useSelector((state: RootState) => state.user.status) ===
     LoadingStatus.Loading;
-
-  useEffect(() => {
-    const fetchAndSetToken = async () => {
-      if (isAuthenticated) {
-        try {
-          const accessToken = await getAccessTokenSilently({
-            authorizationParams: {
-              audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-            },
-          });
-          dispatch(setAccessToken(accessToken));
-        } catch (e) {
-          console.error('Error fetching access token', e);
-        }
-      }
-    };
-
-    fetchAndSetToken();
-  }, [isAuthenticated, getAccessTokenSilently, dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
 
   if (isLoading || isUserLoading) return <div>Loading...</div>;
   if (error) return <div>Oops... {error.message}</div>;

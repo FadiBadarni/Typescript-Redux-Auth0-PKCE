@@ -1,31 +1,33 @@
-import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAccessToken } from '../features/auth/authReducer';
+import { RootState } from '../store/store';
 
 export const useCustomAuth = () => {
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const dispatch = useDispatch();
+
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   useEffect(() => {
     const fetchAccessToken = async () => {
-      if (isAuthenticated) {
-        try {
-          const accessToken = await getAccessTokenSilently({
-            authorizationParams: {
-              audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-            },
-          });
-          dispatch(setAccessToken(accessToken));
-        } catch (e) {
-          const err = e as Error;
-          console.error(err);
-        }
+      try {
+        const token = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+          },
+        });
+        dispatch(setAccessToken(token));
+      } catch (error) {
+        console.error('Error fetching access token', error);
       }
     };
 
-    fetchAccessToken();
-  }, [isAuthenticated, getAccessTokenSilently, dispatch]);
+    if (!accessToken) {
+      fetchAccessToken();
+    }
+  }, [getAccessTokenSilently, dispatch, accessToken]);
 
-  return null;
+  return accessToken;
 };

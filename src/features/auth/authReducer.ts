@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadingStatus } from '../user/userTypes';
 
-interface AuthState {
+export interface AuthState {
   accessToken: string;
   status: LoadingStatus;
   error: string | null;

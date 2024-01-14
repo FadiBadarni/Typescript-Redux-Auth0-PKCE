@@ -1,9 +1,9 @@
-import apiClient, { ErrorData } from './apiClient';
+import apiClient, { ErrorData } from './axiosService';
 
 class UserService {
-  async fetchUserInfo() {
+  async fetchUserInfoService() {
     try {
-      const response = await apiClient.get('/user/register');
+      const response = await apiClient.post('/user/register');
       return response.data;
     } catch (error) {
       const apiError = error as ErrorData;

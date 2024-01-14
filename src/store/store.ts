@@ -1,4 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+import userReducer from '../features/user/userSlice';
+import authReducer from '../features/auth/authReducer';
 import {
   persistStore,
   persistReducer,
@@ -9,9 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import userReducer from '../features/user/userSlice';
 import storage from 'redux-persist/lib/storage';
-import authReducer from '../features/auth/authReducer';
 
 export interface RootState {
   user: ReturnType<typeof userReducer>;

@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { store } from '../store/store';
 
 export interface ErrorData {
   status?: number;
@@ -29,20 +28,6 @@ const handleApiError = (error: AxiosError<ErrorData>): ErrorData => {
   };
 };
 
-apiClient.interceptors.request.use(
-  (config) => {
-    const state = store.getState();
-    const token = state.auth.accessToken;
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError<ErrorData>) => {
@@ -55,5 +40,18 @@ apiClient.interceptors.response.use(
     return Promise.reject(apiError);
   }
 );
+
+export const setupInterceptors = (store: any) => {
+  apiClient.interceptors.request.use(
+    (config) => {
+      const token = store.getState().auth.accessToken;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+};
 
 export default apiClient;
