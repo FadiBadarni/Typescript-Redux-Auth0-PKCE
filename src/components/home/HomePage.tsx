@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { RootState } from 'store/store';
 
 const HomePage: React.FC = () => {
   const userInfo = useSelector((state: RootState) => state.user.data);

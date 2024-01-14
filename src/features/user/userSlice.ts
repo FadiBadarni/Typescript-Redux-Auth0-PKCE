@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState, LoadingStatus } from './userTypes';
 import { REHYDRATE } from 'redux-persist';
+import { LoadingStatus, UserState } from './userTypes';
 import { fetchUserInfo } from './userActions';
 
 interface RehydrateAction {

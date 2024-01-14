@@ -1,11 +1,12 @@
 import { Suspense, useEffect } from 'react';
-import { fetchUserInfo } from './features/user/userActions';
-import './index.css';
-import Navbar from './components/navbar';
-import HomePage from './components/navbar/HomePage';
-import { useCustomAuth } from './hooks/useAuth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useAppDispatch } from './store/useAppDispatch';
+import { useCustomAuth } from 'hooks/useAuth';
+import { useAppDispatch } from 'store/useAppDispatch';
+import { fetchUserInfo } from 'features/user/userActions';
+import Navbar from 'components/navbar';
+import HomePage from 'components/home/HomePage';
+
+import './index.css';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();

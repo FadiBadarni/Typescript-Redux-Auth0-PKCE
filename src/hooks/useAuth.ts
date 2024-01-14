@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import { setAccessToken } from 'features/auth/authReducer';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAccessToken } from '../features/auth/authReducer';
-import { RootState } from '../store/store';
+import { RootState } from 'store/store';
 
 export const useCustomAuth = () => {
   const { getAccessTokenSilently } = useAuth0();

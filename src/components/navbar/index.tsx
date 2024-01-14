@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
-import { RootState } from '../../store/store';
-import { clearUser } from '../../features/user/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import { clearAccessToken } from '../../features/auth/authReducer';
+import { clearUser } from 'features/user/userSlice';
+import { clearAccessToken } from 'features/auth/authReducer';
+import { RootState } from 'store/store';
 
 const Navbar: React.FC = () => {
   const { loginWithRedirect, logout } = useAuth0();

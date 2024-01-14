@@ -1,11 +1,10 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import { Provider } from 'react-redux';
-import { persistor, store } from './store/store';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { PersistGate } from 'redux-persist/integration/react';
-import { setupInterceptors } from './services/axiosService';
+import { persistor, store } from 'store/store';
+import { setupInterceptors } from 'services/axiosService';
+import App from 'App';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);

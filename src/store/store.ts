@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import userReducer from '../features/user/userSlice';
-import authReducer from '../features/auth/authReducer';
+import userReducer from 'features/user/userSlice';
+import authReducer from 'features/auth/authReducer';
 import {
   persistStore,
   persistReducer,
