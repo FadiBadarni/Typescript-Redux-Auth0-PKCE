@@ -25,12 +25,12 @@ const App: React.FC = () => {
     <Suspense fallback="loading">
       <Router>
         <div
-          className={`flex flex-col h-screen ${
+          className={`flex flex-col h-screen overflow-auto scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-800 ${
             theme === 'dark' ? 'dark' : 'light'
           }`}
         >
           <Navbar />
-          <div className="flex-grow p-4 overflow-auto scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-800">
+          <div className="flex-grow p-4">
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>

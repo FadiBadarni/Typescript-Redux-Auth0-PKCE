@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-opacity-80 flex-none transition-colors duration-500 border-b border-gray-700 bg-gray-900">
       <div className="max-w-8xl mx-auto">
-        <div className="py-4 lg:px-8 mx-4 lg:mx-0">
+        <div className="py-3 lg:px-8 mx-4 lg:mx-0">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-bold text-white hover:text-teal-400 cursor-pointer">
               My Store
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
               {userData ? (
                 <button
                   onClick={handleLogout}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-300 ease-in-out"
+                  className="text-white bg-gray-800 hover:bg-gray-600 font-medium py-2 px-4 rounded inline-flex items-center transition duration-300 ease-in-out"
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                   Log out
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <button
                   onClick={() => loginWithRedirect()}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-300 ease-in-out"
+                  className="text-white bg-gray-800 hover:bg-gray-600 font-medium py-2 px-4 rounded inline-flex items-center transition duration-300 ease-in-out"
                 >
                   <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
                   Log in
