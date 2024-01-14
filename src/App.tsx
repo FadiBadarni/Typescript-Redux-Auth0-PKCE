@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <Router>
         <div className="flex flex-col h-screen bg-gray-900">
           <Navbar />
-          <div className="flex-grow p-4 overflow-auto text-white">
+          <div className="flex-grow p-4 overflow-auto text-white scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-800">
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>

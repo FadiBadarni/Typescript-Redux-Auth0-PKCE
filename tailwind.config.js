@@ -4,6 +4,6 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
 };
