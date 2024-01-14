@@ -5,6 +5,7 @@ import { RootState } from '../../store/store';
 import { clearUser } from '../../features/user/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { clearAccessToken } from '../../features/auth/authReducer';
 
 const Navbar: React.FC = () => {
   const { loginWithRedirect, logout } = useAuth0();
@@ -13,6 +14,7 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
+    dispatch(clearAccessToken());
     dispatch(clearUser());
   };
 

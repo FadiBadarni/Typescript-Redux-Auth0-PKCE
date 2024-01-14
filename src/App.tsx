@@ -1,37 +1,35 @@
-import { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from './store/store';
-import { LoadingStatus } from './features/user/userTypes';
+import { Suspense, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from './store/store';
 import { fetchUserInfo } from './features/user/userActions';
 import './index.css';
 import Navbar from './components/navbar';
 import HomePage from './components/navbar/HomePage';
 import { useCustomAuth } from './hooks/useAuth';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-function App() {
-  const { isLoading, error } = useAuth0();
+const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const accessToken = useCustomAuth();
+
   useEffect(() => {
     if (accessToken) {
       dispatch(fetchUserInfo());
     }
   }, [accessToken, dispatch]);
 
-  const isUserLoading =
-    useSelector((state: RootState) => state.user.status) ===
-    LoadingStatus.Loading;
-
-  if (isLoading || isUserLoading) return <div>Loading...</div>;
-  if (error) return <div>Oops... {error.message}</div>;
-
   return (
-    <div>
-      <Navbar />
-      <HomePage />
-    </div>
+    <Suspense fallback="loading">
+      <Router>
+        <Navbar />
+        <div style={{ flexGrow: 1, padding: '1rem' }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </div>
+      </Router>
+    </Suspense>
   );
-}
+};
 
 export default App;
