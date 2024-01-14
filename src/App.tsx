@@ -21,11 +21,13 @@ const App: React.FC = () => {
   return (
     <Suspense fallback="loading">
       <Router>
-        <Navbar />
-        <div style={{ flexGrow: 1, padding: '1rem' }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-          </Routes>
+        <div className="flex flex-col h-screen bg-gray-900">
+          <Navbar />
+          <div className="flex-grow p-4 overflow-auto text-white">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+            </Routes>
+          </div>
         </div>
       </Router>
     </Suspense>
