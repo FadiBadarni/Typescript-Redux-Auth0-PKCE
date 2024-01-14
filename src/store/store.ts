@@ -11,19 +11,22 @@ import {
 } from 'redux-persist';
 import userReducer from '../features/user/userSlice';
 import storage from 'redux-persist/lib/storage';
+import authReducer from '../features/auth/authReducer';
 
 export interface RootState {
   user: ReturnType<typeof userReducer>;
+  auth: ReturnType<typeof authReducer>;
 }
 
 const rootReducer = combineReducers({
   user: userReducer,
+  auth: authReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user'],
+  whitelist: ['user', 'auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

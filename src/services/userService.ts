@@ -3,7 +3,7 @@ import apiClient, { ErrorData } from './apiClient';
 class UserService {
   async fetchUserInfo() {
     try {
-      const response = await apiClient.get('/user/info');
+      const response = await apiClient.get('/user/register');
       return response.data;
     } catch (error) {
       const apiError = error as ErrorData;
