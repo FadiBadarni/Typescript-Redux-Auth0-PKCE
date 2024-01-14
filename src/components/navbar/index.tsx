@@ -2,20 +2,31 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSignOutAlt,
+  faSignInAlt,
+  faMoon,
+  faSun,
+} from '@fortawesome/free-solid-svg-icons';
 import { clearUser } from 'features/user/userSlice';
 import { clearAccessToken } from 'features/auth/authReducer';
 import { RootState } from 'store/store';
+import { toggleTheme } from 'features/theme/themeSlice';
 
 const Navbar: React.FC = () => {
   const { loginWithRedirect, logout } = useAuth0();
   const userData = useSelector((state: RootState) => state.user.data);
+  const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
     dispatch(clearAccessToken());
     dispatch(clearUser());
+  };
+
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme());
   };
 
   return (
@@ -26,7 +37,17 @@ const Navbar: React.FC = () => {
             <h1 className="text-xl font-bold text-white hover:text-teal-400 cursor-pointer">
               My Store
             </h1>
-            <div>
+            <div className="flex items-center">
+              <button
+                onClick={handleToggleTheme}
+                className="text-white p-2 rounded-full hover:bg-gray-700 transition duration-300 ease-in-out mr-4 flex items-center"
+              >
+                {theme === 'light' ? (
+                  <FontAwesomeIcon icon={faSun} />
+                ) : (
+                  <FontAwesomeIcon icon={faMoon} />
+                )}
+              </button>
               {userData ? (
                 <button
                   onClick={handleLogout}

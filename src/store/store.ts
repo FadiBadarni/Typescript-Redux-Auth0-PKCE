@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import userReducer from 'features/user/userSlice';
 import authReducer from 'features/auth/authReducer';
+import themeReducer from 'features/theme/themeSlice';
 import {
   persistStore,
   persistReducer,
@@ -17,11 +18,13 @@ import storage from 'redux-persist/lib/storage';
 export interface RootState {
   user: ReturnType<typeof userReducer>;
   auth: ReturnType<typeof authReducer>;
+  theme: ReturnType<typeof themeReducer>;
 }
 
 const rootReducer = combineReducers({
   user: userReducer,
   auth: authReducer,
+  theme: themeReducer,
 });
 
 const persistConfig = {
