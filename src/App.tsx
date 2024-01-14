@@ -7,10 +7,13 @@ import Navbar from 'components/navbar';
 import HomePage from 'components/home/HomePage';
 
 import './index.css';
+import { RootState } from 'store/store';
+import { useSelector } from 'react-redux';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const accessToken = useCustomAuth();
+  const theme = useSelector((state: RootState) => state.theme.theme);
 
   useEffect(() => {
     if (accessToken) {
@@ -21,9 +24,13 @@ const App: React.FC = () => {
   return (
     <Suspense fallback="loading">
       <Router>
-        <div className="flex flex-col h-screen bg-gray-900">
+        <div
+          className={`flex flex-col h-screen ${
+            theme === 'dark' ? 'dark' : 'light'
+          }`}
+        >
           <Navbar />
-          <div className="flex-grow p-4 overflow-auto text-white scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-800">
+          <div className="flex-grow p-4 overflow-auto scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-800">
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>

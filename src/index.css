@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .dark {
+    --tw-bg-opacity: 1;
+    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+    color: white;
+  }
+
+  .light {
+    --tw-bg-opacity: 1;
+    background-color: rgba(231, 229, 228, var(--tw-bg-opacity));
+    color: black;
+  }
+}
