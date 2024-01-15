@@ -2,12 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 import { UserState } from './userTypes';
 import { fetchUserInfo } from './userActions';
-import { LoadingStatus } from 'features/common/commonTypes';
-
-interface RehydrateAction {
-  type: typeof REHYDRATE;
-  payload?: { user: UserState };
-}
+import { LoadingStatus, RehydrateAction } from 'features/common/commonTypes';
 
 const initialState: UserState = {
   data: null,
@@ -52,11 +47,12 @@ const userSlice = createSlice({
         state.status = LoadingStatus.Failed;
         state.error = action.error.message || 'Failed to fetch user info';
       })
-      // Handler for rehydration action from redux-persist
       .addCase(REHYDRATE, (state, action: RehydrateAction) => {
-        if (action.payload?.user) {
-          state.data = action.payload.user.data;
-          state.status = action.payload.user.status;
+        const incomingUser = action.payload?.user;
+        if (incomingUser) {
+          state.data = incomingUser.data;
+          state.status = incomingUser.status ?? initialState.status;
+          state.error = incomingUser.error ?? initialState.error;
         }
       });
   },

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadingStatus } from 'features/common/commonTypes';
+import { LoadingStatus, RehydrateAction } from 'features/common/commonTypes';
+import { REHYDRATE } from 'redux-persist';
 
 export interface AuthState {
   accessToken: string;
@@ -33,6 +34,17 @@ const authSlice = createSlice({
     setAuthError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(REHYDRATE, (state, action: RehydrateAction) => {
+      const incomingAuth = action.payload?.auth;
+      if (incomingAuth) {
+        state.accessToken =
+          incomingAuth.accessToken ?? initialState.accessToken;
+        state.status = incomingAuth.status ?? initialState.status;
+        state.error = incomingAuth.error ?? initialState.error;
+      }
+    });
   },
 });
 

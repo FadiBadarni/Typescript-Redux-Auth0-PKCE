@@ -8,10 +8,10 @@ import {
   faMoon,
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
-import { clearUser } from 'features/user/userSlice';
+import { clearUser } from 'features/user/userReducer';
 import { clearAccessToken } from 'features/auth/authReducer';
 import { RootState } from 'store/store';
-import { toggleTheme } from 'features/theme/themeSlice';
+import { toggleTheme } from 'features/theme/themeReducer';
 
 const Navbar: React.FC = () => {
   const { loginWithRedirect, logout } = useAuth0();
