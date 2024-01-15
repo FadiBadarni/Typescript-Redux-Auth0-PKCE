@@ -9,11 +9,13 @@ import HomePage from 'components/home/HomePage';
 import './index.css';
 import { RootState } from 'store/store';
 import { useSelector } from 'react-redux';
+import { useSetupAxiosInterceptors } from 'hooks/useSetupAxiosInterceptors';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const accessToken = useCustomAuth();
   const theme = useSelector((state: RootState) => state.theme.theme);
+  useSetupAxiosInterceptors();
 
   useEffect(() => {
     if (accessToken) {
