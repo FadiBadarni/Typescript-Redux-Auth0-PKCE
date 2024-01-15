@@ -1,15 +1,4 @@
-export interface CommonState<T> {
-  data: T;
-  status: LoadingStatus;
-  error: string | null;
-}
-
-export enum LoadingStatus {
-  Idle = 'idle',
-  Loading = 'loading',
-  Succeeded = 'succeeded',
-  Failed = 'failed',
-}
+import { CommonState } from 'features/common/commonTypes';
 
 export interface UserData {
   auth0Id: string;

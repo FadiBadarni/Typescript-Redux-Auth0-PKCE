@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
-import { LoadingStatus, UserState } from './userTypes';
+import { UserState } from './userTypes';
 import { fetchUserInfo } from './userActions';
+import { LoadingStatus } from 'features/common/commonTypes';
 
 interface RehydrateAction {
   type: typeof REHYDRATE;

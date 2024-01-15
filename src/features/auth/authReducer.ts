@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadingStatus } from 'features/user/userTypes';
+import { LoadingStatus } from 'features/common/commonTypes';
 
 export interface AuthState {
   accessToken: string;
