@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Typescript-Redux-Auth0-PKCE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to this project! It's a straightforward implementation of Auth0 with TypeScript and Redux, focusing on the PKCE (Proof Key for Code Exchange) method. Designed for both learning and practical use, this repository demonstrates how to enhance security in client applications using PKCE in a React frontend environment. Dive in to see how TypeScript, Redux, and Auth0 can work together to create a more secure authentication process!
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- TypeScript implementation for type safety and developer efficiency.
+- State management using Redux.
+- Integration with Auth0 for authentication using PKCE.
+- Implementation of Redux-Persist for state persistence.
+- Axios setup for API calls with automated token handling.
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Before you begin, ensure you have met the following requirements:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js (version 12 or above).
+- Yarn or npm for package management.
+- An Auth0 account and an application set up for PKCE flow.
 
-### `npm test`
+## Setting Up
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+To set up the project, follow these steps:
+1. Clone the repository:
+  ```
+  https://github.com/FadiBadarni/Typescript-Redux-Auth0-PKCE.git
+  ```
+2. Navigate to the project directory:
+  ```
+  cd Typescript-Redux-Auth0-PKCE
+  ```
+3.Install the dependencies:
+  ```
+  npm install
+  ```
+4.Environment Configuration
+Set up the following environment variables in a .env file:
+  ```
+  # Auth0 Configuration
+  REACT_APP_AUTH0_DOMAIN=your_auth0_domain
+  REACT_APP_AUTH0_CLIENT_ID=your_auth0_client_id
+  REACT_APP_AUTH0_AUDIENCE=your_auth0_audience
+  REACT_APP_AUTH0_REDIRECT_URI=your_auth0_redirect_uri
+  
+  # Backend API Configuration
+  REACT_APP_API_URL=your_api_url
+  ```
